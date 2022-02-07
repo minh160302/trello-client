@@ -1,11 +1,4 @@
-import {
-  call,
-  put,
-  takeLatest,
-  takeEvery,
-  all,
-  ActionPattern,
-} from "redux-saga/effects";
+import { call, put, takeEvery, all } from "redux-saga/effects";
 import { FAILURE, SUCCESS } from "../root/action-types";
 import { CARD } from "../root/constants";
 import { createCardService } from "../service/card";

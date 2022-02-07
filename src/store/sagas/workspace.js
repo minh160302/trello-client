@@ -1,11 +1,4 @@
-import {
-  call,
-  put,
-  takeLatest,
-  takeEvery,
-  all,
-  ActionPattern,
-} from "redux-saga/effects";
+import { call, put, takeEvery, all } from "redux-saga/effects";
 import { FAILURE, SUCCESS } from "../root/action-types";
 import { WORKSPACE } from "../root/constants";
 import { getWorkspaceService } from "../service/workspace";
@@ -17,8 +10,7 @@ function* getWorkspace(action) {
       type: SUCCESS(WORKSPACE.getWorkspace),
       payload: workspace,
     });
-  }
-  else {
+  } else {
     yield put({
       type: FAILURE(WORKSPACE.getWorkspace),
       payload: workspace,

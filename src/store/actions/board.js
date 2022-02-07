@@ -6,3 +6,10 @@ export const getBoard = (request) => {
     payload: request,
   };
 };
+
+export const createBoard = (request) => {
+  return {
+    type: BOARD.createBoard,
+    payload: request,
+  };
+};

@@ -15,8 +15,8 @@ const initialize = (initialState, middlewares = []) => {
     initialState,
     composeWithDevTools(applyMiddleware(...defaultMiddlewares, ...middlewares))
   );
-  sagaMiddleware.run(rootSaga); 
-  return store; 
+  sagaMiddleware.run(rootSaga);
+  return store;
 };
 
 export default initialize;

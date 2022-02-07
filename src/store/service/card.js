@@ -1,6 +1,6 @@
 import axios from "axios"
 
 export const createCardService = async (payload) => {
-  const res = await axios.post("/card", payload);
+  const res = await axios.post("/trello/card", payload);
   return res;
 }

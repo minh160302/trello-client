@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import Workspace from "./views/workspace/Workspace";
 import { BrowserRouter, Route, Routes } from "react-router-dom";

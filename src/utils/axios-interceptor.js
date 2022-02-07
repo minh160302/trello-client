@@ -1,14 +1,12 @@
 import axios from "axios";
-import { SERVER_API_URL } from "./constants"
+import { SERVER_API_URL } from "./constants";
 
 // config defaults for axios
-axios.defaults.baseURL = SERVER_API_URL
-axios.defaults.headers.post['Content-Type'] = 'application/json';
-
+axios.defaults.baseURL = SERVER_API_URL;
+axios.defaults.headers.post["Content-Type"] = "application/json";
 
 const setUpAxiosInterceptors = (onErrorHandling) => {
-
-  const onResponseSuccess = (response) => response
+  const onResponseSuccess = (response) => response;
   const onResponseError = (error) => {
     if (error.response && error.response.data) {
       const status = error.status || error.response.status;
@@ -22,6 +20,6 @@ const setUpAxiosInterceptors = (onErrorHandling) => {
   };
 
   axios.interceptors.response.use(onResponseSuccess, onResponseError);
-}
+};
 
 export default setUpAxiosInterceptors;

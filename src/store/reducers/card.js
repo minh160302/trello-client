@@ -7,20 +7,21 @@ const initialState = {
   renderCreateAdd: false,
 };
 
-export default (state = initialState, action) => {  
+// eslint-disable-next-line import/no-anonymous-default-export
+export default (state = initialState, action) => {
   switch (action.type) {
     case FAILURE(CARD.createCard):
       return {
         ...state,
-        error: action.payload
-      }
+        error: action.payload,
+      };
 
     case SUCCESS(CARD.createCard):
       return {
         ...state,
         error: {},
         card: action.payload,
-        renderCreateAdd: !state.renderCreateAdd
+        renderCreateAdd: !state.renderCreateAdd,
       };
 
     default:

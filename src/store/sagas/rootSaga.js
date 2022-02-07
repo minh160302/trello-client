@@ -1,11 +1,4 @@
-import {
-  call,
-  put,
-  takeEvery,
-  takeLatest,
-  all,
-  fork,
-} from "redux-saga/effects";
+import { all, fork } from "redux-saga/effects";
 import BoardWatcher from "./board";
 import CardWatcher from "./card";
 import CatalogWatcher from "./catalog";
@@ -16,6 +9,6 @@ export default function* rootSaga() {
     fork(WorkspaceWatcher),
     fork(BoardWatcher),
     fork(CatalogWatcher),
-    fork(CardWatcher)
-  ])
+    fork(CardWatcher),
+  ]);
 }

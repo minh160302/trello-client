@@ -1,14 +1,7 @@
-import {
-  call,
-  put,
-  takeLatest,
-  takeEvery,
-  all,
-  ActionPattern,
-} from "redux-saga/effects";
+import { call, put, takeEvery, all } from "redux-saga/effects";
 import { FAILURE, SUCCESS } from "../root/action-types";
 import { BOARD } from "../root/constants";
-import { getBoardService } from "../service/board";
+import { createBoardService, getBoardService } from "../service/board";
 
 function* getBoard(action) {
   const board = yield call(getBoardService, action.payload);
@@ -17,8 +10,7 @@ function* getBoard(action) {
       type: SUCCESS(BOARD.getBoard),
       payload: board,
     });
-  }
-  else {
+  } else {
     yield put({
       type: FAILURE(BOARD.getBoard),
       payload: board,
@@ -26,8 +18,24 @@ function* getBoard(action) {
   }
 }
 
+function* createBoard(action) {
+  const board = yield call(createBoardService, action.payload);
+  if (board.status === 201) {
+    yield put({
+      type: SUCCESS(BOARD.createBoard),
+      payload: board,
+    });
+  } else {
+    yield put({
+      type: FAILURE(BOARD.createBoard),
+      payload: board,
+    });
+  }
+}
+
 function* boardWorker() {
   yield takeEvery(BOARD.getBoard, getBoard);
+  yield takeEvery(BOARD.createBoard, createBoard);
 }
 
 function* BoardWatcher() {

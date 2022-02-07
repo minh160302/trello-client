@@ -6,13 +6,14 @@ const initialState = {
   workspace: {},
 };
 
-export default (state = initialState, action) => {  
+// eslint-disable-next-line import/no-anonymous-default-export
+export default (state = initialState, action) => {
   switch (action.type) {
     case FAILURE(WORKSPACE.getWorkspace):
       return {
         ...state,
-        error: action.payload
-      }
+        error: action.payload,
+      };
 
     case SUCCESS(WORKSPACE.getWorkspace):
       return {

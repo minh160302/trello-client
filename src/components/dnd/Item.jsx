@@ -1,27 +1,27 @@
-import { makeStyles } from '@mui/styles'
-import React, { useState } from 'react'
-import { Draggable } from 'react-beautiful-dnd'
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-import { IconButton } from '@mui/material';
-import ModalCard from '../card/ModalCard';
+import { makeStyles } from "@mui/styles";
+import React, { useState } from "react";
+import { Draggable } from "react-beautiful-dnd";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import { IconButton } from "@mui/material";
+import ModalCard from "../card/ModalCard";
 
 const useStyles = makeStyles({
   item: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderRadius: 4,
-    padding: '8px 12px',
-    transition: 'background-color .8s ease-out',
+    padding: "8px 12px",
+    transition: "background-color .8s ease-out",
     marginTop: 8,
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
 
-    ':hover': {
-      backgroundColor: '#fff',
-      transition: 'background-color .1s ease-in'
-    }
-  }
-})
+    ":hover": {
+      backgroundColor: "#fff",
+      transition: "background-color .1s ease-in",
+    },
+  },
+});
 
 const Item = (props) => {
   const { card, index } = props;
@@ -31,16 +31,15 @@ const Item = (props) => {
   const handleOpenCard = () => {
     setOpen(true);
     // fetch card here
-  }
+  };
 
   const handleCloseCard = () => {
     setOpen(false);
-  }
-
+  };
 
   return (
     <Draggable draggableId={card.id} index={index}>
-      {provided => (
+      {(provided) => (
         <div
           className={classes.item}
           ref={provided.innerRef}
@@ -55,7 +54,7 @@ const Item = (props) => {
         </div>
       )}
     </Draggable>
-  )
-}
+  );
+};
 
-export default Item
+export default Item;
