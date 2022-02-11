@@ -15,7 +15,10 @@ export const CATALOG = {
 };
 
 export const CARD = {
+  openCard: "OPEN_CARD",
   createCard: "CREATE_CARD",
+  upload: "UPLOAD",
+  updateCard: "UPDATE_CARD"
 };
 
 export const AUTH = {

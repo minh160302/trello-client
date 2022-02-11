@@ -4,6 +4,9 @@ import { Draggable } from "react-beautiful-dnd";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import { IconButton } from "@mui/material";
 import ModalCard from "../card/ModalCard";
+// redux
+import { openCard } from "../../store/actions/card";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles({
   item: {
@@ -29,6 +32,7 @@ const Item = (props) => {
   const [open, setOpen] = useState(false);
 
   const handleOpenCard = () => {
+    props.openCard(card);
     setOpen(true);
     // fetch card here
   };
@@ -48,7 +52,7 @@ const Item = (props) => {
         >
           <span>{card.title}</span>
           {open === true && (
-            <ModalCard card={card} open={open} handleClose={handleCloseCard} />
+            <ModalCard open={open} handleClose={handleCloseCard} />
           )}
           <IconButton onClick={handleOpenCard}>
             <ModeEditOutlineIcon />
@@ -59,4 +63,10 @@ const Item = (props) => {
   );
 };
 
-export default Item;
+const mapStateToProps = ({}) => ({});
+
+const mapDispatchToProps = {
+  openCard,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Item);

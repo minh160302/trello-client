@@ -11,6 +11,8 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case FAILURE(CARD.createCard):
+    case FAILURE(CARD.upload):
+    case FAILURE(CARD.updateCard):
       return {
         ...state,
         error: action.payload,
@@ -23,7 +25,27 @@ export default (state = initialState, action) => {
         card: action.payload,
         renderCreateAdd: !state.renderCreateAdd,
       };
-
+    case SUCCESS(CARD.upload):
+      return {
+        ...state,
+        card: {
+          ...state.card,
+          attachments: [...state.card.attachments, action.payload.path],
+        },
+        // just upload, not re-render
+      };
+    case SUCCESS(CARD.updateCard):
+      return {
+        ...state,
+        error: {},
+        card: action.payload,
+        renderCreateAdd: !state.renderCreateAdd,
+      };
+    case CARD.openCard:
+      return {
+        ...state,
+        card: action.payload,
+      };
     default:
       return state;
   }

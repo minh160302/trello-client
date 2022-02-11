@@ -3,6 +3,7 @@ import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { makeStyles } from "@mui/styles";
+import FileUpload from "../../upload/FileUpload";
 
 const useStyles = makeStyles({
   actionBtn: {
@@ -29,6 +30,9 @@ export default function AttachmentPopover(props) {
       }}
     >
       <Typography sx={{ p: 1 }}>attachment</Typography>
+      <div>
+        <FileUpload />
+      </div>
     </Popover>
   );
 }
