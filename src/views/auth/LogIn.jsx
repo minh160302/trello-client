@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import { Grid } from "@mui/material";
 
@@ -56,10 +55,9 @@ export default function LogIn() {
 						name="password"
 						value={text.password}
 						helperText="Please enter your password"
-						type="text"
 						label="Password"
 						type={showPassword ? "text" : "password"}
-						onChange={handleChange}
+						onChange={handleChange}						
 					/>
 				</div> <br />
 				<div>
