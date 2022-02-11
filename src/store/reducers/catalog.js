@@ -24,6 +24,7 @@ export default (state = initialState, action) => {
         ...state,
         error: {},
         message: action.payload,
+        renderCreateCatalog: !state.renderCreateCatalog,
       };
     case SUCCESS(CATALOG.createCatalog):
       return {

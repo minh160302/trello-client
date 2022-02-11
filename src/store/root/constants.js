@@ -17,3 +17,7 @@ export const CATALOG = {
 export const CARD = {
   createCard: "CREATE_CARD",
 };
+
+export const AUTH = {
+  getUsers: "GET_USERS",
+};

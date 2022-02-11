@@ -47,7 +47,9 @@ const Item = (props) => {
           {...provided.dragHandleProps}
         >
           <span>{card.title}</span>
-          <ModalCard card={card} open={open} handleClose={handleCloseCard} />
+          {open === true && (
+            <ModalCard card={card} open={open} handleClose={handleCloseCard} />
+          )}
           <IconButton onClick={handleOpenCard}>
             <ModeEditOutlineIcon />
           </IconButton>

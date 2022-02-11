@@ -1,7 +1,7 @@
 import { call, put, takeEvery, all } from "redux-saga/effects";
 import { FAILURE, SUCCESS } from "../root/action-types";
 import { BOARD } from "../root/constants";
-import { createBoardService, getBoardService } from "../service/board";
+import { createBoardService, getBoardService } from "../service/trello/board";
 
 function* getBoard(action) {
   const board = yield call(getBoardService, action.payload);

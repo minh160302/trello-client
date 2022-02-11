@@ -6,7 +6,7 @@ import {
   deleteCatalogService,
   moveCatalogService,
   updateCatalogService,
-} from "../service/catalog";
+} from "../service/trello/catalog";
 
 function* createCatalog(action) {
   const catalog = yield call(createCatalogService, action.payload);

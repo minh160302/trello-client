@@ -1,7 +1,7 @@
 import { call, put, takeEvery, all } from "redux-saga/effects";
 import { FAILURE, SUCCESS } from "../root/action-types";
 import { WORKSPACE } from "../root/constants";
-import { getWorkspaceService } from "../service/workspace";
+import { getWorkspaceService } from "../service/trello/workspace";
 
 function* getWorkspace(action) {
   const workspace = yield call(getWorkspaceService, action.payload);
