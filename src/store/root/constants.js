@@ -15,10 +15,17 @@ export const CATALOG = {
 };
 
 export const CARD = {
-  openCard: "OPEN_CARD",
+  getCardById: "OPEN_CARD",
   createCard: "CREATE_CARD",
   upload: "UPLOAD",
-  updateCard: "UPDATE_CARD"
+  updateCard: "UPDATE_CARD",
+  clearCard: "CLEAR_CARD",
+  // checklist actions
+  createChecklist: "CREATE_CHECKLIST",
+  checkTask: "CHECK_TASK",
+  updateChecklistTitle: "UPDATE_CHECKLIST_TITLE",
+  addTask: "ADD_TASK",
+  deleteTask: "DELETE_TASK"
 };
 
 export const AUTH = {

@@ -24,7 +24,8 @@ import AttachmentOutlinedIcon from "@mui/icons-material/AttachmentOutlined";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 // redux
 import { connect } from "react-redux";
-import { updateCard } from "../../store/actions/card";
+import { updateCard, getCardById } from "../../store/actions/card";
+import Checklist from "../checklist/Checklist";
 
 const style = {
   position: "absolute",
@@ -97,21 +98,50 @@ const useStyles = makeStyles({
     maxWidth: "300px",
     marginBottom: "5px",
   },
+  cardTitle: {
+    "&:hover": {
+      cursor: "pointer",
+    },
+  },
+  description: {
+    margin: "0px 0px 20px 30px",
+    fontStyle: "italic",
+    "&:hover": {
+      cursor: "pointer",
+    },
+  },
 });
 
 const ModalCard = (props) => {
   const { open, handleClose } = props;
   const classes = useStyles();
   const [catalogName, setCatalogName] = useState("");
+  const [isEditDescription, setIsEditDescription] = useState(false);
   const [description, setDescription] = useState("");
+  const [isEditTitle, setIsEditTitle] = useState(false);
+  const [title, setTitle] = useState("");
 
   useEffect(() => {
-    const catalogId = props.card.catalogId;
-    const catalog = props.board.catalogs.filter(
-      (cat) => cat.id === catalogId
-    )[0];
-    setCatalogName(catalog.title);
-    setDescription(props.card.description);
+    if (props.card.id != null) {
+      props.getCardById(props.card.id);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.renderCard]);
+
+  useEffect(() => {
+    if (props.card.catalogId != null) {
+      const catalogId = props.card.catalogId;
+      const catalog = props.board.catalogs.filter(
+        (cat) => cat.id === catalogId
+      )[0];
+      setCatalogName(catalog.title);
+      setDescription(props.card.description);
+      if (props.card.description === "") {
+        setIsEditDescription(true);
+      }
+      setTitle(props.card.title);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.card]);
 
   // popover
@@ -161,9 +191,10 @@ const ModalCard = (props) => {
   const handleSubmit = () => {
     const data = {
       id: props.card.id,
-      title: props.card.title,
+      title: title,
       description: description,
       attachments: props.attachments,
+      checklists: props.card.checklists.map((c) => c.id) || [],
     };
     props.updateCard(data);
     handleClose();
@@ -171,6 +202,20 @@ const ModalCard = (props) => {
 
   const handleCancleSubmit = () => {
     handleClose();
+  };
+
+  // Edit card Title
+  const handleEditTitle = () => {
+    setIsEditTitle(true);
+  };
+
+  const handleChangeTitle = (event) => {
+    setTitle(event.target.value);
+  };
+
+  // Edit description
+  const handleClickEditDescription = () => {
+    setIsEditDescription(true);
   };
 
   return (
@@ -184,9 +229,30 @@ const ModalCard = (props) => {
         <Box sx={style}>
           <div className={classes.headerContainer}>
             <CreditCardIcon />
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              {props.card.title}
-            </Typography>
+            {isEditTitle === true ? (
+              <div>
+                <TextField
+                  id="outlined-multiline-static"
+                  className={classes.addTextArea}
+                  fullWidth
+                  defaultValue={title}
+                  onChange={handleChangeTitle}
+                />
+                <Button onClick={() => setIsEditTitle(false)}>Save</Button>
+              </div>
+            ) : (
+              <Typography
+                onClick={handleEditTitle}
+                id="modal-modal-title"
+                variant="h6"
+                component="h2"
+                classes={{
+                  root: classes.cardTitle,
+                }}
+              >
+                {title}
+              </Typography>
+            )}
           </div>
           <div className={classes.emText}>in catalog {catalogName}</div>
           <div className={classes.contentWrapper}>
@@ -197,16 +263,37 @@ const ModalCard = (props) => {
                   Description
                 </Typography>
               </div>
-              <TextField
-                id="outlined-multiline-static"
-                className={classes.addTextArea}
-                multiline
-                rows={3}
-                fullWidth
-                defaultValue={props.card.description}
-                placeholder="Add a more detailed description..."
-                onChange={handleChange}
-              />
+              {isEditDescription === true || description === "" ? (
+                <>
+                  <TextField
+                    id="outlined-multiline-static"
+                    className={classes.addTextArea}
+                    multiline
+                    rows={3}
+                    fullWidth
+                    defaultValue={description}
+                    placeholder="Add a more detailed description..."
+                    onChange={handleChange}
+                  />
+                  <Button onClick={() => setIsEditDescription(false)}>
+                    Save
+                  </Button>
+                </>
+              ) : (
+                <div
+                  onClick={handleClickEditDescription}
+                  className={classes.description}
+                >
+                  {description}
+                </div>
+              )}
+              {/* Checklist Container */}
+              <div>
+                {props.checklists?.map((checklist, cKey) => (
+                  <Checklist key={cKey} checklist={checklist} />
+                ))}
+              </div>
+
               {/* Image Container */}
               <div>
                 {props.attachments?.map((file, imageKey) => (
@@ -309,10 +396,13 @@ const mapStateToProps = ({ board, card }) => ({
   board: board.board.data,
   card: card.card,
   attachments: card.card.attachments,
+  checklists: card.card.checklists,
+  renderCard: card.renderCard,
 });
 
 const mapDispatchToProps = {
   updateCard,
+  getCardById,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalCard);
