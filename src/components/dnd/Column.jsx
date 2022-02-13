@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     marginTop: 8,
   },
   item: {
-    backgroundColor: "#ddd",
+    backgroundColor: "#ededed",
     borderRadius: 8,
     padding: "0px 16px 16px 16px",
     display: "flex",
@@ -37,7 +37,8 @@ const useStyles = makeStyles({
   addBtnRoot: {
     border: "none",
     textTransform: "none !important",
-    color: "black !important",
+    color: "#807e7e !important",
+    margin: "-10px 0px -5px 0px !important"
   },
   addTextArea: {
     border: "none",
@@ -54,12 +55,19 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginTop: "10px",
+    marginLeft: "3px",
   },
   editContainer: {
     display: "flex",
     flexDirection: "column",
   },
+  editTitle: {
+    marginTop: "20px !important",
+    padding: "-10px !important",
+    backgroundColor: "#fff",
+    borderRadius: "10px",
+    color: "#807e7e !important",
+  }
 });
 
 const Column = (props) => {
@@ -133,12 +141,13 @@ const Column = (props) => {
           <div className={classes.item}>
             <div className={classes.itemHeader}>
               {isEditTitle === false ? (
-                <h2>{id}</h2>
+                <h3>{id}</h3>
               ) : (
                 <div className={classes.editContainer}>
                   <TextField
                     id="outlined-multiline-static"
                     fullWidth
+                    className={classes.editTitle}
                     defaultValue={id}
                     placeholder="Edit title of card"
                     onChange={handleChange}

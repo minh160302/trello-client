@@ -41,7 +41,7 @@ export default function CatalogPopover(props) {
           color="secondary"
           startIcon={<EditRoundedIcon />}
         >
-          Edit catalog title...
+          Edit catalog title
         </Button>
       </Typography>
       <Typography sx={{ p: 1 }}>
@@ -51,7 +51,7 @@ export default function CatalogPopover(props) {
           color="warning"
           startIcon={<DeleteRoundedIcon />}
         >
-          Delete catalog...
+          Delete catalog
         </Button>
       </Typography>
     </Popover>

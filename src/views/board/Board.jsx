@@ -11,21 +11,40 @@ import { moveCatalog, createCatalog } from "../../store/actions/catalog";
 
 const useStyles = makeStyles({
   root: {
-    margin: "20px",
+    marginTop: -20,
+    height: "100vh",
+    overflowY: "auto",
+    backgroundColor: "#fdc985",
   },
   inputContainer: {
+    marginLeft: 30,
     display: "flex",
     flexDirection: "column",
   },
   addTextArea: {
     margin: "10px 0px !important",
     maxWidth: "350px",
+    backgroundColor: "#FFFFFF",
+    borderRadius: "10px"
   },
   addBtnRoot: {
     border: "none",
     textTransform: "none !important",
-    color: "black !important",
+    color: "white !important",
+    borderRadius: "0px 8px 8px !important",
+    backgroundColor: "#0089d9 !important",
   },
+  boardName: {
+    padding: "20px 0px 20px 30px",
+    color: "black",
+  },
+  infoTopCorner: {
+    padding: "0px 0px 20px 30px",
+    color: "black",
+  },
+  catalogs: {
+    marginLeft: 30,
+  }
 });
 
 const Board = (props) => {
@@ -46,7 +65,7 @@ const Board = (props) => {
     if (boardId != null) {
       props.getBoard(boardId);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [boardId, props.renderCreateAdd, props.renderCreateCatalog]);
 
   // event handlers
@@ -79,13 +98,12 @@ const Board = (props) => {
     <div className={classes.root}>
       {board != null && (
         <div>
-          <h1>{board.title}</h1>
-          <div>
+          <h2 className={classes.boardName}>{board.title}</h2>
+          <div className={classes.infoTopCorner}>
             <em>{board.description}</em>
           </div>
-          <br></br>
           <div>
-            <em>Created at: {board.createdDate}</em>
+            <em className={classes.infoTopCorner}>Created at: {board.createdDate}</em>
           </div>
           <br></br>
           <div>
@@ -99,25 +117,28 @@ const Board = (props) => {
                   onChange={handleChange}
                 />
                 <div>
-                  <Button onClick={handleSubmit}>Create</Button>
+                  <Button className={classes.addBtnRoot} onClick={handleSubmit}>
+                    Create
+                  </Button>
                   <IconButton onClick={handleCancel}>
                     <CancelIcon />
                   </IconButton>
                 </div>
               </div>
             ) : (
-              <div>
+              <div className={classes.catalogs}>
                 <Button
                   onClick={handleOpenAdd}
+                  size="medium"
                   className={classes.addBtnRoot}
                   startIcon={<AddIcon />}
                 >
-                  Create New Catalog
+                  New Catalog
                 </Button>
               </div>
             )}
           </div>
-          <section>
+          <section className={classes.catalogs} >
             <BoardView boards={board.catalogs} handleMove={props.moveCatalog} />
           </section>
         </div>

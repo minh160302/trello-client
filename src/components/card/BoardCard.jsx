@@ -1,16 +1,38 @@
 import React from "react";
 import Card from "@mui/material/Card";
+import Box from "@mui/material/Box";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import ViewAgendaOutlinedIcon from "@mui/icons-material/ViewAgendaOutlined";
 import { makeStyles } from "@mui/styles";
 import { useNavigate } from "react-router-dom";
+import { margin } from "@mui/system";
 
 const useStyles = makeStyles({
   card: {
-    border: "1px solid blue",
-    borderRadius: "20px !important",
+    backgroundColor: "#fdb26c !important",
+    boxShadow: 100,
+    borderRadius: "0px 15px 15px !important",
+    border: "1px solid",
+    textTransform: "none !important",
+    color: "black !important",
+  },
+  addTextArea: {
+    border: "3px solid",
+    textTransform: "none !important",
+    color: "black !important",
+    backgroundColor: "#fee0c4 !important",
+    borderRadius: "10px !important",
+    margin: "0px 0px 5px 10px !important"
+  },
+  title: {
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
+    // backgroundColor: "#FD956C !important",
+    width: "100vw",
+    // maxWidth: "100vw"
   },
 });
 
@@ -24,26 +46,31 @@ export default function BoardCard(props) {
   };
 
   return (
-    <Card className={classes.card} sx={{ minWidth: 275 }}>
-      <CardContent>
-        <Typography variant="h5" component="div">
-          {board.title}
-        </Typography>
-        <Typography color="text.secondary">{board.description}</Typography>
-        <Typography sx={{ mb: 1.5 }} variant="body2">
-          Created at: {board.createdDate}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button
-          onClick={() => {
-            handleBoardClick(board.id);
-          }}
-          size="small"
-        >
-          View
-        </Button>
-      </CardActions>
-    </Card>
+    <Box>
+      <Card className={classes.card} sx={{ minWidth: 275 }}>
+        <CardContent>
+          <Typography sx={{ fontWeight: 600 }} className={classes.title} variant="h6" component="div">
+            {board.title}
+          </Typography>
+          <Typography sx={{ mb: 1.5 }} variant="body2">
+            Created at: {board.createdDate}
+          </Typography>
+          <Typography color="text.secondary">{board.description}</Typography>
+        </CardContent>
+        <CardActions>
+          <Button
+            onClick={() => {
+              handleBoardClick(board.id);
+            }}
+            className={classes.addTextArea}
+            size="small"
+          >
+            <ViewAgendaOutlinedIcon fontSize="small" />
+          </Button>
+        </CardActions>
+      </Card>
+
+    </Box>
+
   );
 }
