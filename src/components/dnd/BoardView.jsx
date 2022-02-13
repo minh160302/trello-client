@@ -9,7 +9,7 @@ const useStyles = makeStyles({
     columnGap: "15px",
     // margin: '30px auto',
     width: "100%",
-    overflowY: "scroll",
+    // overflowY: "scroll",
     gap: "8px",
   },
 });

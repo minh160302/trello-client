@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     overflowY: "auto",
     background: 'linear-gradient(45deg, #265077 ,#022140 )',
     // backgroundColor:"#022140 !important",
-    postion: "fixed",
+    // postion: "fixed",
   },
   boardContainer: {
     Height: "500px",
