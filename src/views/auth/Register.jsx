@@ -2,9 +2,26 @@ import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { Grid } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 
 
+const useStyles = makeStyles({
+	inputArea: {
+		backgroundColor: "#e6f1ff",
+		borderRadius: "5px",
+		width: "300px",
+	},
+	title: {
+		color: "white"
+	},
+	submitButton: {
+		backgroundColor: "#0ca89b !important",
+		fontWeight: "bold !important"
+	}
+});
 export default function Register() {
+	const classes = useStyles();
+
 	const [showPassword, setShowPassword] = useState(false);
 
 	const handleClick = (event) => {
@@ -38,41 +55,44 @@ export default function Register() {
 				style={{ minHeight: '100vh' }}
 			>
 				<div>
-					<h2>Register</h2>
-				</div><br />
+					<h1 className={classes.title}>Register</h1>				</div><br />
 				<div>
 					<TextField
 						name="email"
+						className={classes.inputArea}
 						value={text.email}
-						helperText="Please enter your email"
-						id="outlined-basic"
-						label="Email"
-						variant="outlined"
+						// helperText="Please enter your password"
+						// label="Password"
+						placeholder="Email"
 						onChange={handleChange}
 					/>
 				</div> <br />
 				<div>
 					<TextField
 						name="username"
+						className={classes.inputArea}
 						value={text.username}
-						helperText="Please enter your username"
+						// helperText="Please enter your username"
+						// label="Username"
+						placeholder="Username"
 						type="text"
-						label="Username"
 						onChange={handleChange}
 					/>
 				</div> <br />
 				<div>
 					<TextField
 						name="password"
+						className={classes.inputArea}
 						value={text.password}
-						helperText="Please enter your password"
-						label="Password"
+						// helperText="Please enter your password"
+						// label="Password"
+						placeholder="Password"
 						type={showPassword ? "text" : "password"}
 						onChange={handleChange}
 					/>
 				</div> <br />
 				<div>
-					<Button onClick={handleSubmit} variant="contained">Submit</Button>
+					<Button className={classes.submitButton} onClick={handleSubmit} variant="contained">Submit</Button>
 				</div>
 			</Grid>
 

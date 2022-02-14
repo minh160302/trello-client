@@ -5,10 +5,10 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import TocIcon from "@mui/icons-material/Toc";
 import ViewAgendaOutlinedIcon from "@mui/icons-material/ViewAgendaOutlined";
 import { makeStyles } from "@mui/styles";
 import { useNavigate } from "react-router-dom";
-import { margin } from "@mui/system";
 
 const useStyles = makeStyles({
   card: {
@@ -44,6 +44,15 @@ export default function BoardCard(props) {
   const handleBoardClick = (id) => {
     navigate(`/board/${id}`);
   };
+  
+  const currentDate = new Date();
+  
+  const date = currentDate.getFullYear() 
+  + '/' + (currentDate.getMonth() + 1) + 
+  '/' + currentDate.getDate() + ' ' 
+  + currentDate.getHours() + ':' 
+  + currentDate.getMinutes() 
+  + ':' + currentDate.getSeconds();
 
   return (
     <Box>
@@ -53,7 +62,7 @@ export default function BoardCard(props) {
             {board.title}
           </Typography>
           <Typography sx={{ mb: 1.5 }} variant="body2">
-            Created at: {board.createdDate}
+            Created at: {date}
           </Typography>
           <Typography color="text.secondary">{board.description}</Typography>
         </CardContent>
@@ -65,7 +74,7 @@ export default function BoardCard(props) {
             className={classes.addTextArea}
             size="small"
           >
-            <ViewAgendaOutlinedIcon fontSize="small" />
+            <TocIcon fontSize="medium" />
           </Button>
         </CardActions>
       </Card>

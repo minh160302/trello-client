@@ -6,7 +6,7 @@ import BoardCard from "../../components/card/BoardCard";
 import { getWorkspace } from "../../store/actions/workspace";
 import CancelIcon from "@mui/icons-material/Cancel";
 import AddIcon from "@mui/icons-material/Add";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import HomeIcon from "@mui/icons-material/Home";
 import { createBoard } from "../../store/actions/board";
 import { GpsFixedTwoTone, ImportantDevices } from "@mui/icons-material";
 
@@ -16,8 +16,6 @@ const useStyles = makeStyles({
     height: "100vh",
     overflowY: "auto",
     background: 'linear-gradient(45deg, #265077 ,#022140 )',
-    // backgroundColor:"#022140 !important",
-    // postion: "fixed",
   },
   boardContainer: {
     Height: "500px",
@@ -28,7 +26,7 @@ const useStyles = makeStyles({
     margin: "10px 0px !important",
     padding: "-20px !important",
     borderRadius: "5px",
-    backgroundColor: "#b0cbe5 !important",
+    backgroundColor: "#e6f1ff !important",
   },
   addBtnRoot: {
     color: "white !important",
@@ -45,6 +43,12 @@ const useStyles = makeStyles({
     margin: "0px 0px 20px 40px",
     color: "white",
   },
+  HomeIcon: {
+    color: "#ff3d3d"
+  },
+  addIcon: {
+    marginRight: "-5px"
+  }
 });
 
 const Workspace = (props) => {
@@ -98,7 +102,7 @@ const Workspace = (props) => {
       {status === 200 && (
         <div>
           <h2 className={classes.spaceName}>
-            <Button><HomeOutlinedIcon /></Button>
+            <Button ><HomeIcon className={classes.HomeIcon} /></Button>
             {workspace.email}'s WORKSPACE
           </h2>
           <section>
@@ -115,15 +119,11 @@ const Workspace = (props) => {
                 <div>
                   <TextField
                     id="outlined-multiline-static"
-                    // className={classes.addTextArea}
                     fullWidth
                     placeholder="Board title"
                     name="title"
                     onChange={handleChange}
-                    focused
-                    classes={{
-                      root: classes.addTextArea,
-                    }}
+                    className={classes.addTextArea}
                     color="primary"
                   />
                   <TextField
@@ -153,7 +153,7 @@ const Workspace = (props) => {
                     onClick={handleOpenAdd}
                     className={classes.addBtnRoot}
                     variant="contained"
-                    startIcon={<AddIcon />}
+                    startIcon={<AddIcon className={classes.addIcon}/>}
                   >
                     NEW BOARD
                   </Button>

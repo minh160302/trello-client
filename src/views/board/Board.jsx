@@ -7,6 +7,7 @@ import { Button, IconButton, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 // redux actions
 import { getBoard } from "../../store/actions/board";
+import TabIcon from "@mui/icons-material/Tab";
 import { moveCatalog, createCatalog } from "../../store/actions/catalog";
 
 const useStyles = makeStyles({
@@ -25,25 +26,38 @@ const useStyles = makeStyles({
     margin: "10px 0px !important",
     maxWidth: "350px",
     backgroundColor: "#FFFFFF",
-    borderRadius: "10px"
+    borderRadius: "5px"
   },
   addBtnRoot: {
     border: "none",
+    fontWeight: "bold !important",
+    paddingRight: "10px !important",
     textTransform: "none !important",
     color: "white !important",
     borderRadius: "0px 8px 8px !important",
     backgroundColor: "#0089d9 !important",
   },
   boardName: {
-    padding: "20px 0px 20px 30px",
-    color: "black",
+    padding: "20px 0px 20px 20px",
+    // textAlign: "center",
+    // color: "#001352",
+
+    color: "#fff",
+    backgroundColor: "#265077 !important",
   },
   infoTopCorner: {
-    padding: "0px 0px 20px 30px",
-    color: "black",
+    padding: "0px 0px 20px 40px",
+    color: "#353147",
   },
   catalogs: {
-    marginLeft: 30,
+    marginLeft: 40,
+  },
+  TabIcon: {
+    color: "#ffffff",
+    fontSize: "medium",
+  },
+  addIcon: {
+    marginRight: "-5px"
   }
 });
 
@@ -55,7 +69,7 @@ const Board = (props) => {
   // states
   const [isAdding, setIsAdding] = useState(false);
   const initialInputState = {
-    title: "",
+    title: "" + "",
     description: "",
   };
   const [input, setInput] = useState(initialInputState);
@@ -94,16 +108,27 @@ const Board = (props) => {
     setIsAdding(false);
   };
 
+  const currentDate = new Date();
+
+  const date = currentDate.getFullYear()
+    + '/' + (currentDate.getMonth() + 1) +
+    '/' + currentDate.getDate() + ' '
+    + currentDate.getHours() + ':'
+    + currentDate.getMinutes()
+    + ':' + currentDate.getSeconds();
+
   return (
     <div className={classes.root}>
       {board != null && (
         <div>
-          <h2 className={classes.boardName}>{board.title}</h2>
+          <h2 className={classes.boardName}>
+            <Button><TabIcon className={classes.TabIcon} /></Button>
+            {board.title}</h2>
           <div className={classes.infoTopCorner}>
             <em>{board.description}</em>
           </div>
           <div>
-            <em className={classes.infoTopCorner}>Created at: {board.createdDate}</em>
+            <em className={classes.infoTopCorner}>Created at: {date}</em>
           </div>
           <br></br>
           <div>
@@ -117,8 +142,8 @@ const Board = (props) => {
                   onChange={handleChange}
                 />
                 <div>
-                  <Button className={classes.addBtnRoot} onClick={handleSubmit}>
-                    Create
+                  <Button size="small" className={classes.addBtnRoot} onClick={handleSubmit}>
+                    CREATE
                   </Button>
                   <IconButton onClick={handleCancel}>
                     <CancelIcon />
@@ -129,11 +154,11 @@ const Board = (props) => {
               <div className={classes.catalogs}>
                 <Button
                   onClick={handleOpenAdd}
-                  size="medium"
+                  size="small"
                   className={classes.addBtnRoot}
-                  startIcon={<AddIcon />}
+                  startIcon={<AddIcon className={classes.addIcon}/>}
                 >
-                  New Catalog
+                  NEW CATALOG
                 </Button>
               </div>
             )}

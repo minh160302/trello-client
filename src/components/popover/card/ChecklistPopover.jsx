@@ -13,15 +13,20 @@ const useStyles = makeStyles({
     textTransform: "none !important",
   },
   checklistTitle: {
-    textAlign: "center",
+    // textAlign: "center",
+    fontWeight: "bold !important"
   },
   checklistContainer: {
     width: "300px",
     margin: "10px",
   },
   addBtn: {
-    marginTop: "8px !important",
+    margin: "5px 0px 0px -10px !important",
   },
+  addTextField: {
+    margin: "5px 0px 0px 5px !important",
+    width: "95% !important",
+  }
 });
 
 function ChecklistPopover(props) {
@@ -62,11 +67,12 @@ function ChecklistPopover(props) {
           }}
           sx={{ p: 1 }}
         >
-          Checklist
+          New checklist
         </Typography>
         <TextField
           id="outlined-multiline-static"
           fullWidth
+          className={classes.addTextField}
           placeholder="Enter the title for this checklist"
           onChange={handleChange}
         />

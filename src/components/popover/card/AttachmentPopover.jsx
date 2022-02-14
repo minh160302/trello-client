@@ -8,7 +8,16 @@ import FileUpload from "../../upload/FileUpload";
 const useStyles = makeStyles({
   actionBtn: {
     textTransform: "none !important",
+    margin: "40px !important"
+    // marginLeft: "100px !important"
   },
+  attachmentContainer: {
+    width: "300px",
+    margin: "10px",
+  },
+  title: {
+    borderBottom: "1px solid black",
+  }
 });
 
 export default function AttachmentPopover(props) {
@@ -29,9 +38,13 @@ export default function AttachmentPopover(props) {
         horizontal: "left",
       }}
     >
-      <Typography sx={{ p: 1 }}>attachment</Typography>
-      <div>
-        <FileUpload />
+      <div className={classes.attachmentContainer}>
+        <Typography sx={{ p: 1 }} fontWeight="bold" className={classes.title}>Select a file</Typography>
+        <br></br>
+        <div classname={classes.actionBtn}>
+          <FileUpload />
+        </div>
+        <br />
       </div>
     </Popover>
   );
