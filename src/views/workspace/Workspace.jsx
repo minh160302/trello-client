@@ -9,13 +9,14 @@ import AddIcon from "@mui/icons-material/Add";
 import HomeIcon from "@mui/icons-material/Home";
 import { createBoard } from "../../store/actions/board";
 import { GpsFixedTwoTone, ImportantDevices } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
     marginTop: -20,
     height: "100vh",
     overflowY: "auto",
-    background: 'linear-gradient(45deg, #265077 ,#022140 )',
+    background: "linear-gradient(45deg, #265077 ,#022140 )",
   },
   boardContainer: {
     Height: "500px",
@@ -31,7 +32,7 @@ const useStyles = makeStyles({
   addBtnRoot: {
     color: "white !important",
     borderRadius: "0px 8px 8px !important",
-    fontWeight: 'bold !important',
+    fontWeight: "bold !important",
     backgroundColor: "#0ca89b !important",
     margin: "20px 0px 20px 0px !important",
   },
@@ -44,16 +45,18 @@ const useStyles = makeStyles({
     color: "white",
   },
   HomeIcon: {
-    color: "#ff3d3d"
+    color: "#ff3d3d",
   },
   addIcon: {
-    marginRight: "-5px"
-  }
+    marginRight: "-5px",
+  },
 });
 
 const Workspace = (props) => {
   const { workspace, status } = props;
   const classes = useStyles();
+  const navigate = useNavigate();
+
   // states
   const [isAdding, setIsAdding] = useState(false);
   const initialInputState = {
@@ -61,6 +64,13 @@ const Workspace = (props) => {
     description: "",
   };
   const [input, setInput] = useState(initialInputState);
+
+  useEffect(() => {
+    const token = localStorage.getItem("AUTH_TOKEN_KEY");
+    if (!token) {
+      navigate("/login");
+    }
+  }, []);
 
   useEffect(() => {
     props.getWorkspace("email@gmail.com");
@@ -95,21 +105,35 @@ const Workspace = (props) => {
 
   const handleCancel = () => {
     setIsAdding(false);
-  }
+  };
+
+  const handleLogout = () => {
+    window.localStorage.removeItem("AUTH_TOKEN_KEY");
+    navigate("/login");
+  };
 
   return (
     <div className={classes.root}>
       {status === 200 && (
         <div>
           <h2 className={classes.spaceName}>
-            <Button ><HomeIcon className={classes.HomeIcon} /></Button>
+            <Button>
+              <HomeIcon className={classes.HomeIcon} />
+            </Button>
             {workspace.email}'s WORKSPACE
+            <Button onClick={handleLogout} color="success">
+              Log out
+            </Button>
           </h2>
           <section>
             <h4 className={classes.yourBoard}>YOUR BOARDS</h4>
             <div>
               {workspace.boards.map((board, key) => (
-                <div style={{ float: "left" }} key={key} className={classes.boardContainer}>
+                <div
+                  style={{ float: "left" }}
+                  key={key}
+                  className={classes.boardContainer}
+                >
                   <BoardCard board={board} />
                 </div>
               ))}
@@ -153,7 +177,7 @@ const Workspace = (props) => {
                     onClick={handleOpenAdd}
                     className={classes.addBtnRoot}
                     variant="contained"
-                    startIcon={<AddIcon className={classes.addIcon}/>}
+                    startIcon={<AddIcon className={classes.addIcon} />}
                   >
                     NEW BOARD
                   </Button>
@@ -161,9 +185,9 @@ const Workspace = (props) => {
               )}
             </div>
           </section>
-        </div >
+        </div>
       )}
-    </div >
+    </div>
   );
 };
 

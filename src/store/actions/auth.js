@@ -5,3 +5,10 @@ export const getUsers = () => {
     type: AUTH.getUsers,
   };
 };
+
+export const login = (request) => {
+  return {
+    type: AUTH.login,
+    payload: request,
+  };
+};

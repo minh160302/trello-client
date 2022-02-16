@@ -25,9 +25,10 @@ export const CARD = {
   checkTask: "CHECK_TASK",
   updateChecklistTitle: "UPDATE_CHECKLIST_TITLE",
   addTask: "ADD_TASK",
-  deleteTask: "DELETE_TASK"
+  deleteTask: "DELETE_TASK",
 };
 
 export const AUTH = {
   getUsers: "GET_USERS",
+  login: "LOGIN",
 };
