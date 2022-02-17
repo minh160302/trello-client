@@ -9,6 +9,7 @@ import { makeStyles } from "@mui/styles";
 import { getBoard } from "../../store/actions/board";
 import TabIcon from "@mui/icons-material/Tab";
 import { moveCatalog, createCatalog } from "../../store/actions/catalog";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -65,6 +66,7 @@ const Board = (props) => {
   const { board } = props;
   const classes = useStyles();
   const boardId = window.location.pathname.split("/")[2];
+  const navigate = useNavigate();
 
   // states
   const [isAdding, setIsAdding] = useState(false);
@@ -108,27 +110,23 @@ const Board = (props) => {
     setIsAdding(false);
   };
 
-  const currentDate = new Date();
-
-  const date = currentDate.getFullYear()
-    + '/' + (currentDate.getMonth() + 1) +
-    '/' + currentDate.getDate() + ' '
-    + currentDate.getHours() + ':'
-    + currentDate.getMinutes()
-    + ':' + currentDate.getSeconds();
+  const handleBoardClick = (id) => {
+    navigate("/");
+  };
 
   return (
     <div className={classes.root}>
       {board != null && (
         <div>
           <h2 className={classes.boardName}>
-            <Button><TabIcon className={classes.TabIcon} /></Button>
+            <Button><TabIcon className={classes.TabIcon} onClick={handleBoardClick}
+            /></Button>
             {board.title}</h2>
           <div className={classes.infoTopCorner}>
             <em>{board.description}</em>
           </div>
           <div>
-            <em className={classes.infoTopCorner}>Created at: {date}</em>
+            <em className={classes.infoTopCorner}>Created: {board.createdDate.replace("T"," at ").slice(0,-8)}</em>
           </div>
           <br></br>
           <div>

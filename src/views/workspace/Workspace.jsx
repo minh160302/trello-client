@@ -37,8 +37,13 @@ const useStyles = makeStyles({
     margin: "20px 0px 20px 0px !important",
   },
   spaceName: {
+    // display: "flex",
     padding: "20px 0px 20px 10px",
     color: "white",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginRight: "20px !important",
   },
   yourBoard: {
     margin: "0px 0px 20px 40px",
@@ -50,6 +55,15 @@ const useStyles = makeStyles({
   addIcon: {
     marginRight: "-5px",
   },
+  logOut: {
+    color: "white !important",
+    borderRadius: "8px 8px 8px !important",
+    fontWeight: "bold !important",
+    backgroundColor: "#0ca89b !important",
+    padding: "4px 5px 4px 3px !important",
+    // marginTop: "5px !important",
+    // justifyContent: "space-between",
+  }
 });
 
 const Workspace = (props) => {
@@ -121,9 +135,11 @@ const Workspace = (props) => {
               <HomeIcon className={classes.HomeIcon} />
             </Button>
             {workspace.email}'s WORKSPACE
-            <Button onClick={handleLogout} color="success">
-              Log out
-            </Button>
+            <IconButton>
+              <Button onClick={handleLogout} className={classes.logOut}>
+                Log out
+              </Button>
+            </IconButton>
           </h2>
           <section>
             <h4 className={classes.yourBoard}>YOUR BOARDS</h4>

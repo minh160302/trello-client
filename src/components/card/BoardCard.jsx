@@ -30,9 +30,7 @@ const useStyles = makeStyles({
   title: {
     textTransform: 'uppercase',
     fontWeight: 'bold',
-    // backgroundColor: "#FD956C !important",
     width: "100vw",
-    // maxWidth: "100vw"
   },
 });
 
@@ -44,15 +42,6 @@ export default function BoardCard(props) {
   const handleBoardClick = (id) => {
     navigate(`/board/${id}`);
   };
-  
-  const currentDate = new Date();
-  
-  const date = currentDate.getFullYear() 
-  + '/' + (currentDate.getMonth() + 1) + 
-  '/' + currentDate.getDate() + ' ' 
-  + currentDate.getHours() + ':' 
-  + currentDate.getMinutes() 
-  + ':' + currentDate.getSeconds();
 
   return (
     <Box>
@@ -62,7 +51,7 @@ export default function BoardCard(props) {
             {board.title}
           </Typography>
           <Typography sx={{ mb: 1.5 }} variant="body2">
-            Created at: {date}
+            Created: {board.createdDate.replace("T"," at ").slice(0,-8)}
           </Typography>
           <Typography color="text.secondary">{board.description}</Typography>
         </CardContent>
