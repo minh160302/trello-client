@@ -7,7 +7,8 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 const sagaMiddleware = createSagaMiddleware();
 
-const defaultMiddlewares = [sagaMiddleware, loggerMiddlewares];
+// const defaultMiddlewares = [sagaMiddleware, loggerMiddlewares];
+const defaultMiddlewares = [sagaMiddleware];
 
 const initialize = (initialState, middlewares = []) => {
   const store = createStore(

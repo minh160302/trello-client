@@ -41,7 +41,7 @@ export default function AttachmentPopover(props) {
       <div className={classes.attachmentContainer}>
         <Typography sx={{ p: 1 }} fontWeight="bold" className={classes.title}>Select a file</Typography>
         <br></br>
-        <div classname={classes.actionBtn}>
+        <div className={classes.actionBtn}>
           <FileUpload />
         </div>
         <br />

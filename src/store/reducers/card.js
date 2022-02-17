@@ -52,6 +52,14 @@ export default (state = initialState, action) => {
         card: {},
         renderCreateAdd: !state.renderCreateAdd,
       };
+    case "UPDATE_DESCRIPTION":
+      return {
+        ...state,
+        card: {
+          ...state.card,
+          description: action.payload,
+        },
+      };
     case SUCCESS(CARD.getCardById):
       return {
         ...state,

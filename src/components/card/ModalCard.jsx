@@ -24,7 +24,11 @@ import AttachmentOutlinedIcon from "@mui/icons-material/AttachmentOutlined";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 // redux
 import { connect } from "react-redux";
-import { updateCard, getCardById } from "../../store/actions/card";
+import {
+  updateCard,
+  getCardById,
+  updateDescription,
+} from "../../store/actions/card";
 import Checklist from "../checklist/Checklist";
 
 const style = {
@@ -275,7 +279,12 @@ const ModalCard = (props) => {
                     placeholder="Add a more detailed description..."
                     onChange={handleChange}
                   />
-                  <Button onClick={() => setIsEditDescription(false)}>
+                  <Button
+                    onClick={() => {
+                      props.updateDescription(description);
+                      setIsEditDescription(false);
+                    }}
+                  >
                     Save
                   </Button>
                 </>
@@ -403,6 +412,7 @@ const mapStateToProps = ({ board, card }) => ({
 const mapDispatchToProps = {
   updateCard,
   getCardById,
+  updateDescription,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalCard);

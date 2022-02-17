@@ -35,6 +35,13 @@ export const updateCard = (request) => {
   };
 };
 
+export const updateDescription = (request) => {
+  return {
+    type: "UPDATE_DESCRIPTION",
+    payload: request,
+  };
+};
+
 // checklist actions
 
 export const createChecklist = (request) => {
